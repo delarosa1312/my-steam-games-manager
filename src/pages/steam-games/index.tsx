@@ -1,4 +1,4 @@
-import { SetStateAction, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Grid2 } from "@mui/material";
 import { steamGamesColumns } from "@core/components/common/steam-games/columns";
 import AdvancedTable from "@core/components/shared/advanced-table";
@@ -10,7 +10,7 @@ import { SteamGame } from "schemas/steam-game/SteamGameView";
 const SteamGames = () => {
   const [data, setData] = useState<SteamGame[]>([]);
   const [editDialogOpen, setEditDialogOpen] = useState(false);
-  const [selectedGame, setSelectedGame] = useState(null);
+  const [selectedGame, setSelectedGame] = useState<SteamGame | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -21,7 +21,7 @@ const SteamGames = () => {
     fetchData();
   }, []);
 
-  const handleEdit = (game: SetStateAction<null>) => {
+  const handleEdit = (game: SteamGame) => {
     setSelectedGame(game);
     setEditDialogOpen(true);
   };

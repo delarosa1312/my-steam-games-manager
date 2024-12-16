@@ -3,18 +3,17 @@ import { IconButton } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 
 type SteamGame = {
-  appid: number;
+  appId: number;
   name: string;
-  playtime_forever: number;
-  img_icon_url: string;
-  has_community_visible_stats: boolean;
-  playtime_windows_forever: number;
-  playtime_mac_forever: number;
-  playtime_linux_forever: number;
-  playtime_deck_forever: number;
-  rtime_last_played: number;
-  content_descriptorids: number[];
-  playtime_disconnected: number;
+  playtimeForever: number;
+  imgIconUrl: string | null;
+  // hasCommunityVisibleStats: boolean;
+  playtimeWindowsForever: number;
+  playtimeMacForever: number;
+  playtimeLinuxForever: number;
+  playtimeDeckForever: number;
+  rTimeLastPlayed: number;
+  playtimeDisconnected: number;
 };
 
 const formatPlaytime = (minutes: number) => {
@@ -31,7 +30,7 @@ const formatTimestamp = (timestamp: number) => {
 export const steamGamesColumns = (handleEdit: (game: SteamGame) => void): MRT_ColumnDef<SteamGame>[] => {
   return [
     {
-      accessorKey: "appid",
+      accessorKey: "appId",
       header: "App ID",
       muiTableBodyCellProps: {
         align: "center",
@@ -39,7 +38,7 @@ export const steamGamesColumns = (handleEdit: (game: SteamGame) => void): MRT_Co
       size: 100,
     },
     {
-      accessorKey: "img_icon_url",
+      accessorKey: "imgIconUrl",
       header: "",
       size: 60,
       muiTableHeadCellProps: {
@@ -49,7 +48,7 @@ export const steamGamesColumns = (handleEdit: (game: SteamGame) => void): MRT_Co
         <div style={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
           <img
             src={`http://media.steampowered.com/steamcommunity/public/images/apps/${
-              cell.row.original.appid
+              cell.row.original.appId
             }/${cell.getValue<string>()}.jpg`}
             alt="Game Icon"
             style={{ width: 50, height: 50, borderRadius: "50%", border: "1px solid #ccc" }}
@@ -63,7 +62,7 @@ export const steamGamesColumns = (handleEdit: (game: SteamGame) => void): MRT_Co
       minSize: 150,
     },
     {
-      accessorKey: "playtime_forever",
+      accessorKey: "playtimeForever",
       header: "Total Playtime",
       size: 100,
       muiTableBodyCellProps: {
@@ -72,7 +71,7 @@ export const steamGamesColumns = (handleEdit: (game: SteamGame) => void): MRT_Co
       Cell: ({ cell }) => formatPlaytime(cell.getValue<number>()),
     },
     {
-      accessorKey: "playtime_windows_forever",
+      accessorKey: "playtimeWindowsForever",
       header: "Playtime Windows",
       size: 100,
       muiTableBodyCellProps: {
@@ -81,7 +80,7 @@ export const steamGamesColumns = (handleEdit: (game: SteamGame) => void): MRT_Co
       Cell: ({ cell }) => formatPlaytime(cell.getValue<number>()),
     },
     {
-      accessorKey: "playtime_deck_forever",
+      accessorKey: "playtimeDeckForever",
       header: "Playtime Deck",
       size: 100,
       muiTableBodyCellProps: {
@@ -90,7 +89,7 @@ export const steamGamesColumns = (handleEdit: (game: SteamGame) => void): MRT_Co
       Cell: ({ cell }) => formatPlaytime(cell.getValue<number>()),
     },
     {
-      accessorKey: "rtime_last_played",
+      accessorKey: "rTimeLastPlayed",
       header: "Last Played",
       minSize: 150,
       muiTableBodyCellProps: {
@@ -99,7 +98,7 @@ export const steamGamesColumns = (handleEdit: (game: SteamGame) => void): MRT_Co
       Cell: ({ cell }) => formatTimestamp(cell.getValue<number>()),
     },
     {
-      accessorKey: "playtime_disconnected",
+      accessorKey: "playtimeDisconnected",
       header: "Playtime Disconnected",
       size: 100,
       muiTableBodyCellProps: {
